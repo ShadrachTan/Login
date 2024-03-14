@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Form</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="login-form">
+        <form action="/login" method="post" onsubmit="event.preventDefault(); return validateAndSubmit();">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <input type="submit" value="Log In">
+        </form>
+    </div>
+    <script>
+        function validateAndSubmit() {
+            const password = document.getElementById('password').value;
+
+            // Check password length
+            if (password.length < 8) {
+                alert('Password must be at least 8 characters long');
+                return false;
+            }
+
+            // Check if password only consists of integers
+            if (/^\d+$/.test(password)) {
+                alert('Password must contain at least one letter');
+                return false;
+            }
+
+            // Check if password is a combination of uppercase and lowercase characters
+            if (!/[a-z]/.test(password) || !/[A-Z]/.test(password)) {
+                alert('Password must contain at least one uppercase and one lowercase letter');
+                return false;
+            }
+
+            // If validation is successful, submit the form
+            document.querySelector('form').submit();
+
+            // Show success message
+            alert('Login successful');
+
+            return true;
+        }
+    </script>
+</body>
+</html>
